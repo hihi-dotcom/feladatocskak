@@ -72,35 +72,35 @@ class DataTable{
 
 
 
-const fajlbe_input = document.createElement(`input`);
-document.body.appendChild(fajlbe_input);
-fajlbe_input.type = `file`;
+const fajlbe_input = document.createElement(`input`);//Létrehozok egy inputot
+document.body.appendChild(fajlbe_input);//hozzáfűzöm az inputot a HTML fájlomhoz
+fajlbe_input.type = `file`;//beállítom az input típusát
 
-fajlbe_input.addEventListener(`change`, (e) => {
-    const sajat_fajlunk = e.target.files[0];
+fajlbe_input.addEventListener(`change`, (e) => {//definiálok egy addeventlistenert, a most létrehozott input change eseményére
+    const sajat_fajlunk = e.target.files[0];//eltárolom egy változóban, az eventtarget(inputunk) files tömb propertyjének első elemét(a mi feltöltött fájlunkat)
 
-    const fajlbeolvaso = new FileReader();
+    const fajlbeolvaso = new FileReader();//példányosítom, a beépített FileReader interfacet
 
-    fajlbeolvaso.readAsText(sajat_fajlunk);
+    fajlbeolvaso.readAsText(sajat_fajlunk);//a FileReader Interface példányára(filebeolvaso), meghívom readAsText beépített metódusát, és annak megadom paraméterként a mi fájlunkat
 
-    fajlbeolvaso.onload = (e) => {
-        const fajlunk_contentje = e.target.result;
+    fajlbeolvaso.onload = (e) => {//a FileReader Interface példányára(fajlbeolvaso) létrehozok egy eseménykezelőt, pontosan a load eseményre az .onload metódus és egy arrow function segítségével
+        const fajlunk_contentje = e.target.result;//eltároljuk egy változóban az inputunk propertyjeként a FileReader result propertyjét, amely a beolvasott fájlt egy string tömbként adja vissza nekünk
 
-        const fajlunk_sorai = fajlunk_contentje.split(`\n`);
-        const koltesek_bevetelek_tombje = [];
-        for(const line of fajlunk_sorai){
-            const elemek = line.split(`;`);
+        const fajlunk_sorai = fajlunk_contentje.split(`\n`);//A most létrehozott string tömböt tördeljük, új soronként
+        const koltesek_bevetelek_tombje = [];//létrehozok egy üres tömböt
+        for(const line of fajlunk_sorai){//bejárom a string tömb letördelt sorait egy for of ciklusssal
+            const elemek = line.split(`;`);//ezeket a letördelt sorokat tovább tördelem elemekre, pontos vesszőként, és ezt eltárolom egy változóban, ez egy string tömb lesz ismét
 
-            const koltes_bevetel = {
-                megnevezes: elemek[0],
-                helyszin: elemek[1],
-                honap: elemek[2],
-                osszeg: elemek[3]
+            const koltes_bevetel = {//definiálom a koltes_bevetel objektumot
+                megnevezes: elemek[0],//létrehozom a megnevezes tulajdonságát a koltes_bevetel objektumnak, és értékül adom neki az elemek tömb első elemét
+                helyszin: elemek[1],//létrehozom a helyszin tulajdonságát a koltes_bevetel objektumnak, és értékül adom neki az elemek tömb második elemét
+                honap: elemek[2],//létrehozom a honap tulajdonságát a koltes_bevetel objektumnak, és értékül adom neki az elemek tömb harmadik elemét
+                osszeg: elemek[3]//létrehozom a osszeg tulajdonságát a koltes_bevetel objektumnak, és értékül adom neki az elemek tömb negyedik elemét
             };
-            koltesek_bevetelek_tombje.push(koltes_bevetel);
+            koltesek_bevetelek_tombje.push(koltes_bevetel);//majd a korábban létrehozott üres tömböt feltöltöm ezekkel az objektumokkal
 
             
         }
-        const adattablazat = new DataTable(koltesek_bevetelek_tombje);
+        const adattablazat = new DataTable(koltesek_bevetelek_tombje);//példányosítom a DataTable osztályomat, amely egy tömb paramétert vár, és megadom neki a koltesek_bevetelek_tombje tömböt értékül
     };
 });
