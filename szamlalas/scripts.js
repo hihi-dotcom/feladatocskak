@@ -29,7 +29,7 @@ class DataTable{
         this.htmlElementMaker(`th`, t_head_sor, `Összeg`);
 
         this.render_Tablazat(kolt_bev_tomb);
-        this.htmlElementMaker(`div`, document.body, `A költségeink száma: ${this.szamlalas(kolt_bev_tomb)},`)
+        this.htmlElementMaker(`div`, document.body, `A költségeink száma: ${this.szamlalas(kolt_bev_tomb)}.`)
     };
 
 
@@ -54,9 +54,8 @@ class DataTable{
 
     szamlalas(kolt_bev_tomb){
         let counter = 0;
-        
-        for(let i = 0; i < kolt_bev_tomb.length; i++){
-            counter += Number(kolt_bev_tomb[i]);
+        for(let i = 0; i < kolt_bev_tomb.length; i++){   
+            counter ++;
         }
 
         return counter;
