@@ -21,22 +21,12 @@ class DataTable{
         table.appendChild(table_body);
 
         const t_head_sor = document.createElement(`tr`);
+        table_head.appendChild(t_head_sor);
 
-        const th_megnevezes = document.createElement(`th`);
-        th_megnevezes.innerHTML = `Megnevezés`;
-        t_head_sor.appendChild(th_megnevezes);
-
-        const th_helyszin = document.createElement(`th`);
-        th_helyszin.innerHTML = `Helyszín`;
-        t_head_sor.appendChild(th_helyszin);
-
-        const th_honap = document.createElement(`th`);
-        th_honap.innerHTML = `Hónap`;
-        t_head_sor.appendChild(th_honap);
-
-        const th_osszeg = document.createElement(`th`);
-        th_osszeg.innerHTML = `Összeg`;
-        t_head_sor.appendChild(th_osszeg);
+        this.htmlElementMaker(`th`, t_head_sor, `Megnevezés`);
+        this.htmlElementMaker(`th`, t_head_sor, `Helyszín`);
+        this.htmlElementMaker(`th`, t_head_sor, `Hónap`);
+        this.htmlElementMaker(`th`, t_head_sor, `Összeg`);
 
         this.render_Tablazat(kolt_bev_tomb);
     };
@@ -48,26 +38,21 @@ class DataTable{
         for(const kolt_bev of koltseg_bevetel_tomb){
             const body_sor = document.createElement(`tr`);
             this.tbody.appendChild(body_sor);
-
-            const elso_cella = document.createElement(`td`);
-            body_sor.appendChild(elso_cella);
-            elso_cella.innerHTML = kolt_bev.megnevezes;
-
-            const masodik_cella = document.createElement(`td`);
-            body_sor.appendChild(masodik_cella);
-            masodik_cella.innerHTML = kolt_bev.helyszin;
-
-            const harmadik_cella = document.createElement(`td`);
-            body_sor.appendChild(harmadik_cella);
-            harmadik_cella.innerHTML = kolt_bev.honap;
-
-            const negyedik_cella = document.createElement(`td`);
-            body_sor.appendChild(negyedik_cella);
-            negyedik_cella.innerHTML = kolt_bev.osszeg;
+            this.htmlElementMaker(`td`, body_sor, kolt_bev.megnevezes);
+            this.htmlElementMaker(`td`, body_sor, kolt_bev.helyszin);
+            this.htmlElementMaker(`td`, body_sor, kolt_bev.honap);
+            this.htmlElementMaker(`td`, body_sor, kolt_bev.osszeg);
         };
+    };
+
+    htmlElementMaker(htmlelem, parentelem, innerHTML){
+        const htmlElement = document.createElement(htmlelem);
+        parentelem.appendChild(htmlElement);
+        htmlElement.innerHTML = innerHTML;
     }
 
 };
+
 
 
 
@@ -99,7 +84,8 @@ fajlbe_input.addEventListener(`change`, (e) => {
             };
             koltesek_bevetelek_tombje.push(koltes_bevetel);
 
-            const adattablazat = new DataTable(koltesek_bevetelek_tombje);
+            
         }
+        const adattablazat = new DataTable(koltesek_bevetelek_tombje);
     };
 });
