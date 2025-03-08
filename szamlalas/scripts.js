@@ -10,6 +10,8 @@ class DataTable{
     constructor(kolt_bev_tomb){
         this.array = kolt_bev_tomb;
         
+        
+
         const table = document.createElement(`table`);
         document.body.appendChild(table);
 
@@ -23,13 +25,16 @@ class DataTable{
         const t_head_sor = document.createElement(`tr`);
         table_head.appendChild(t_head_sor);
 
+
         this.htmlElementMaker(`th`, t_head_sor, `Megnevezés`);
         this.htmlElementMaker(`th`, t_head_sor, `Helyszín`);
         this.htmlElementMaker(`th`, t_head_sor, `Hónap`);
         this.htmlElementMaker(`th`, t_head_sor, `Összeg`);
 
         this.render_Tablazat(kolt_bev_tomb);
+
         this.htmlElementMaker(`div`, document.body, `A költségeink száma: ${this.szamlalas(kolt_bev_tomb)}.`)
+        
     };
 
 
