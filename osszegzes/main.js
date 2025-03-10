@@ -69,16 +69,21 @@ class Data_to_Table{
         
     };
 
-   osszeg = (tomb_param1) => {
-        let pozitiv_szamlalo = 0;
-        let negativ_szamlalo = 0;
+    /**
+     * 
+     * @param {Array} tomb_param1 
+     * @returns {Array}
+     */
+   osszeg(tomb_param1){
+        let pozitiv_osszegzo = 0;
+        let negativ_osszegzo = 0;
        
         for(let i = 0; i < tomb_param1.length; i++){
             if(tomb_param1[i].osszeg > 0){
-                pozitiv_szamlalo += Number(tomb_param1[i].osszeg);
+                pozitiv_osszegzo += Number(tomb_param1[i].osszeg);
             }
             else if(tomb_param1[i].osszeg < 0){
-                negativ_szamlalo += Number(tomb_param1[i].osszeg);
+                negativ_osszegzo += Number(tomb_param1[i].osszeg);
             }
         }
         return [pozitiv_szamlalo, negativ_szamlalo];
