@@ -11,7 +11,7 @@ class DataToTable{
         this.htmlElementMaker(`th`, `Megnevezés`, thead);
         this.htmlElementMaker(`th`, `Helyszín`, thead);
         this.htmlElementMaker(`th`, `Hónap`, thead);
-        this.htmlElementMaker(`th`, `Összeg`, thead);
+        this.htmlElementMaker(`th`, `Összeg`, thead)
 
         for(const element of at_tomb){
             const tr = this.htmlElementMaker(`tr`, ``, tbody);
@@ -46,7 +46,68 @@ class DataToTable{
     }
 };
 
+class Area{
 
+    valuesarray;
+    csokkenovagynovekvoarray;
+    constructor(){
+     const form = document.createElement("form");
+     document.body.appendChild(form);
+
+     const select_elem = document.createElement("select");
+     form.appendChild(select_elem);
+
+     const csokkenovagynovekvo = document.createElement("select");
+     form.appendChild(csokkenovagynovekvo);
+       this.valuesarray = [
+        {
+            value: "megnevezes",
+            innerHTML: "Megnevezés"
+        },
+        {
+            value: "helyszin",
+            innerHTML: "Helyszín"
+        },
+        {
+            value: "honap",
+            innerHTML: "Hónap"
+        },
+        {
+            value: "koltseg",
+            innerHTML: "Költség"
+        }
+       ];
+       this.csokkenovagynovekvoarray = [
+            {value: "csokkeno",
+            innerHTML:"Csökkenő"
+            },
+            {
+                value: "novekvo",
+                innerHTML: "Növekvő"
+            }
+       ];
+       for(const ertek of this.valuesarray){
+        this.optionHTMLElementMaker(ertek,select_elem)
+       };
+       for(const ertek of this.csokkenovagynovekvoarray){
+        this.optionHTMLElementMaker(ertek,csokkenovagynovekvo)
+        };
+
+        const submitgomb = document.createElement("button");
+        form.appendChild(submitgomb);
+        submitgomb.innerHTML = "Rendezés";
+        submitgomb.type = "submit";
+    };
+
+    optionHTMLElementMaker(valuearrayelement, parent){
+        const opcio = document.createElement("option");
+        opcio.value = valuearrayelement.value;
+        opcio.innerHTML = valuearrayelement.innerHTML;
+        parent.appendChild(opcio);
+
+        return opcio;
+    }
+}
 
 
 
@@ -79,3 +140,5 @@ input_file.addEventListener(`change`, (e) => {
         console.log(kolt_bevetel_tomb);
     };
 });
+
+const arena = new Area();
