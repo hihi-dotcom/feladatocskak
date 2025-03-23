@@ -88,13 +88,16 @@ class Manager{
         else{
             let counter = 0;
 
-            for(const question of this.#array){
-                if(this.#array[question].rightAnswer === this.#selectedAnswer){
+            for(let i = 0; i < this.#array.length; i++){
+                if(this.#selectedAnswer[i] === this.#array[i].rightAnswer){
                     counter++;
                 }
-            }
+              
+            };
 
             this.#finishCallback(`A tesztnek vége lett a helyes válaszok: ${this.#array.length} / ${counter}.`);
+
+
         };
     };
 
@@ -102,5 +105,15 @@ class Manager{
         this.#nextQuestionCallback(this.#array[0].questionText);
         this.#nextAnswersCallback(this.#array[0].answers);
     };
+
+    /**
+     * 
+     * @param {Question} question 
+     *@returns {void} 
+     *
+     */
+    add(question){
+        this.#array.push(question);
+    }
 
 };

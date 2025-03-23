@@ -82,7 +82,7 @@ class AnswersArea extends Area{
                 this.div.appendChild(valasz_div);
 
                 valasz_div.addEventListener('click', (e) => {
-                    manager2.nextQuestion(bemen_param);
+                    manager2.nextQuestion(valasz);
                 });
             }
         });

@@ -65,3 +65,23 @@ const area_question = new QuestionArea('question', manager);
 const area_answers = new AnswersArea('answer-area', manager);
 
 manager.start();
+
+const fajlos_input = document.createElement('input');
+fajlos_input.type = 'file';
+
+fajlos_input.addEventListener('change', (e) => {
+  const faljunk = e.target.files[0];
+
+  const fajlreader = new FileReader();
+
+  fajlreader.onload = () => {
+    const fajl = fajlreader.result;
+
+    const fajlunk_sorai = fajl.split('\n');
+
+    for(const fajlsor of fajlunk_sorai){
+      const sor = fajlsor.trim();
+      const sor_elem = sor.split(';');
+    }
+  }
+});
