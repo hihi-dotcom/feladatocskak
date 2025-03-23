@@ -97,7 +97,18 @@ class Area{
         form.appendChild(submitgomb);
         submitgomb.innerHTML = "Rendezés";
         submitgomb.type = "submit";
+
+        submitgomb.addEventListener(`submit`, (e) => {
+            e.preventDefault();
+            for(const kolt_bev of this.tomb){
+                this.selectkivalasztas(select_elem, 'Hónap',)
+            }
+            
+
+        });
     };
+
+    
 
     optionHTMLElementMaker(valuearrayelement, parent){
         const opcio = document.createElement("option");
@@ -106,8 +117,44 @@ class Area{
         parent.appendChild(opcio);
 
         return opcio;
+    };
+
+    /**
+     * @param {function (koltseg, koltseg):boolean} rendezo_callback 
+     */
+    orderBy(rendezo_callback){
+        const result_rendezes = [];
+
+        for(const koltseg of this.tomb){
+            result_rendezes.push(koltseg);
+        }
+        for(let a = 0; a < result_rendezes.length; a++){
+            
+            for(let j = a + 1; j < result_rendezes.length; j++){
+                if(rendezo_callback(result_rendezes[i], result_rendezes[j])){
+                    const temp = result_rendezes[i];
+                    result_rendezes[i] = result_rendezes[j];
+                    result_rendezes[j] = temp;
+                };
+            };
+            
+        };
+    };
+
+/**
+ * 
+ * @param {HTMLElement} selectrendezo 
+ * @param {string} vizsgalnikivantmegnevezes 
+ * @param {function(koltseg, koltseg):boolean} rendezofuggveny 
+ */
+    selectkivalasztas(selectrendezo, vizsgalnikivantmegnevezes, property1,){
+        if(selectrendezo.value === vizsgalnikivantmegnevezes){
+            this.orderBy((koltseg1, koltseg2) => {
+                return koltseg1.property1.localCompare(koltseg2.property1)
+            });
+        };
     }
-}
+};
 
 
 
