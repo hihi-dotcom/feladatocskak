@@ -28,6 +28,12 @@ class Question{
         return this.#rightAnswer;
     };
 
+    /**
+     * 
+     * @param {string} questionSzoveg 
+     * @param {string[]} valaszok 
+     * @param {string} helyesValasz 
+     */
     constructor(questionSzoveg, valaszok, helyesValasz){
         this.#questionText = questionSzoveg;
         this.#answers = valaszok;
