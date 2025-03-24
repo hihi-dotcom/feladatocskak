@@ -21,6 +21,8 @@ fajlos_input.addEventListener('change', (e) => {
 
   const fajlreader = new FileReader();
 
+  fajlreader.readAsText(faljunk);
+
   fajlreader.onload = () => {
     const fajl = fajlreader.result;
 

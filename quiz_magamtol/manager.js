@@ -13,6 +13,10 @@
  * @callback FinishCallback
  * @returns {void}
  * 
+ * @param {Question} question
+ * @callback AddCallback
+ * @returns {void}
+ * 
  */
 class Manager{
     
@@ -48,6 +52,11 @@ class Manager{
     #selectedAnswer;
 
     /**
+     * @type {AddCallback}
+     */
+    #addCallback;
+
+    /**
      * 
      * @param {Question[]} bemeneti_array 
      */
@@ -55,6 +64,7 @@ class Manager{
         this.#array = bemeneti_array;
         this.#currentQuestionNumber = 0;
         this.#selectedAnswer = {};
+        this.#addCallback = () => {};
     };
 
     settingNextQuestionCallback(callback1){
@@ -67,6 +77,10 @@ class Manager{
 
     settingFinishCallback(callback3){
         this.#finishCallback = callback3;
+    };
+
+    settingAddCallback(callback4){
+        this.#addCallback = callback4;
     };
 
     /**
@@ -114,6 +128,7 @@ class Manager{
      */
     add(question){
         this.#array.push(question);
+        this.#addCallback(question);
     }
 
 };
