@@ -57,8 +57,8 @@ class FormController{
        
         for(const formmezo of this.#formFieldArray){
             
-            formmezo.error.textContent = '';
-            if(formmezo.inputElement.value === ""){
+            formmezo.error = '';
+            if(formmezo.inputElement === ""){
                 validate = false;
                 formmezo.error.textContent = "A mező kitöltése kötelező!";
             }
