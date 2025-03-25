@@ -36,16 +36,18 @@ class FormController{
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            this.#validateFields();
-            this.#getValueObject();
-            const question1 = new Question(this.#getValueObject().questionText, [
-                this.#getValueObject().answer1,
-                this.#getValueObject().answer2,
-                this.#getValueObject().answer3,
-                this.#getValueObject().answer4,
-            ], this.#getValueObject().rightAnswer);
-
-            manager.add(question1);
+            if(this.#validateFields() === true){
+                this.#getValueObject();
+                const question1 = new Question(this.#getValueObject().questionText, [
+                    this.#getValueObject().answer1,
+                    this.#getValueObject().answer2,
+                    this.#getValueObject().answer3,
+                    this.#getValueObject().answer4,
+                ], this.#getValueObject().rightAnswer);
+    
+                manager.add(question1);
+            };
+            
             e.target.reset();
         })};
     /**
@@ -54,13 +56,13 @@ class FormController{
     #validateFields(){
 
         let validate = true;
-       
+        
         for(const formmezo of this.#formFieldArray){
-            
             formmezo.error = '';
-            if(formmezo.inputElement === ""){
+            
+            if(formmezo.value === ""){
                 validate = false;
-                formmezo.error.textContent = "A mező kitöltése kötelező!";
+                formmezo.error = "A mező kitöltése kötelező!";
             }
         };
         return validate;

@@ -26,15 +26,6 @@ class Table{
             for(const tbodytart of tbodyelements){
                 this.makingHTMLElement('td', tr, tbodytart.innerHTML);
             }
-            /*
-            this.makingHTMLElement("td", tr, question.questionText);
-            this.makingHTMLElement("td", tr, question.answers[0]);
-            this.makingHTMLElement("td", tr, question.answers[1]);
-            this.makingHTMLElement("td", tr, question.answers[2]);
-            this.makingHTMLElement("td", tr, question.answers[3]);
-
-            this.makingHTMLElement("td", tr, question.rightAnswer);
-            */
         });
         
     };
