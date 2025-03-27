@@ -10,21 +10,30 @@ class Area{
      */
     #div;
 
+    //div privát tulajdonság gettere
     get div(){
         return this.#div;
     };
 
+    /**
+     * 
+     * @param {string} cssosztaly 
+     */
     constructor(cssosztaly){
-        this.#cssosztaly = cssosztaly;
-        const kontener = this.gettingDivElements();
-        kontener.className = "container";
+        this.#cssosztaly = cssosztaly;//Beállítjuk a css osztály tulajdonságot
+        const kontener = this.gettingDivElements();//eltároljuk a függvény visszatérési értékét egy változóban
+        kontener.className = "container";//a divnek, ami a függvényünk visszatérésnek az értéke, megadjuk a container classt
 
-        const child_div = document.createElement('div');
-        child_div.className = cssosztaly;
-        kontener.appendChild(child_div);
-        this.#div = child_div;
+        const child_div = document.createElement('div');//létrehozunk egy új divet
+        child_div.className = cssosztaly;//megadjuk neki a constructor bemeneti paraméterét
+        kontener.appendChild(child_div);//appendáljuk a container divhez a child divünket
+        this.#div = child_div;//majd a div privát tulajdonságunknak megadjuk a child_div értékét
     };
 
+    /**
+     * 
+     * @returns {HTMLDivElement}
+     */
     gettingDivElements(){
         let container = document.querySelector('.container');
 
@@ -45,6 +54,14 @@ class TableArea extends Area{
      */
     #manager;
 
+    /**
+     * 
+     * @param {string} cssosztaly 
+     * @param {Manager} manager 
+     * 
+     * A constructorban létrehozzuk a táblázatunk egyes nagyobb részeit, és hozzá appendáljuk a child divjükhöz 
+     */
+    
     constructor(cssosztaly, manager){
         super(cssosztaly);
         this.#manager = manager;
@@ -61,7 +78,7 @@ class TableArea extends Area{
         this.makingHTMLElement('th', tablazatfejsor, 'század');
         
 
-           
+        //meghívom a manager settingAddCallbackjét, amely a formból a táblázatba való pusholásért felel
         manager.settingAddCallBack((author) => {
             const tr = document.createElement('tr');
             tablazatbody.appendChild(tr);
@@ -71,6 +88,13 @@ class TableArea extends Area{
         });
     };
 
+    /**
+     * 
+     * @param {string} htmlelem 
+     * @param {HTMLElement} parent 
+     * @param {string} innerHTML 
+     * @returns {HTMLElement}
+     */
     makingHTMLElement(htmlelem, parent, innerHTML){
         const htmlelement = document.createElement(htmlelem);
         htmlelement.innerHTML = innerHTML;
@@ -104,23 +128,24 @@ class FormArea extends Area{
      * @param {Manager} manager  
      */
     constructor(cssosztaly, formFieldArray, manager){
-        super(cssosztaly);
-        this.#formFieldArray = formFieldArray;
+        super(cssosztaly);//meghívom az ősosztály konstruktorát
+        this.#formFieldArray = formFieldArray; //beállítom a privát tulajdonságok értékeit
         this.#formfieldek = [];
         this.#manager = manager;
-      
-        const form = this.makingFormHTMLElement('form', this.div, "");
-        for(const formmezo of formFieldArray){
-            const formfield = new FormField(formmezo.id, formmezo.label);
-            this.#formfieldek.push(formfield);
+        
+        
+        const form = this.makingFormHTMLElement('form', this.div, "");//létrehozom a formot
+        for(const formmezo of formFieldArray){//bejárom a megkapott formfieldeket
+            const formfield = new FormField(formmezo.id, formmezo.label);//példányosítgatom a formfieldeket
+            this.#formfieldek.push(formfield);//eltárolom a formfieldeket egy másik tömbben
 
-            form.appendChild(formfield.AppendingtoDivElement());
+            form.appendChild(formfield.AppendingtoDivElement());//appendelem a formfieldeket, a formomhoz
         }
 
        const submit_gombos =  this.makingFormHTMLElement('button', form, 'Hozzáadás');
-       submit_gombos.type = 'submit';
-       form.addEventListener('submit', (e)=> {
-            e.preventDefault();
+       submit_gombos.type = 'submit';//megcsinálom a submit gombját a formnak
+       form.addEventListener('submit', (e)=> {//az addeventListenerben a form submit eseményét vizsgálom validálom az értékeket
+            e.preventDefault();//megakadályozom hogy lefusson az alapértelmezett működés
             console.log(this.#validateFields());
             if(this.#validateFields() === true){
                 const formertekek = this.#getValueObject();
@@ -131,10 +156,17 @@ class FormArea extends Area{
             }
             
 
-            e.target.reset();
+            e.target.reset(); //resetelem a formom
        });
     };
 
+    /**
+     * 
+     * @param {string} htmlelem 
+     * @param {HTMLElement} parent 
+     * @param {string} innerHTML 
+     * @returns {HTMLElement}
+     */
     makingFormHTMLElement(htmlelem, parent, innerHTML){
         const htmlelement = document.createElement(htmlelem);
         htmlelement.innerHTML = innerHTML;
@@ -143,6 +175,10 @@ class FormArea extends Area{
         return htmlelement;
     };
 
+    /**
+     * 
+     * @returns {FormField}
+     */
     #getValueObject(){
         const ertektempobj = {};
         for(const formfield of this.#formfieldek){
@@ -152,6 +188,10 @@ class FormArea extends Area{
         return ertektempobj;
     };
 
+    /**
+     * 
+     * @returns {boolean}
+     */
     #validateFields(){
         let validating = true;
         for(const formfield of this.#formfieldek){
@@ -169,9 +209,25 @@ class FormArea extends Area{
 };
 
 class FormField{
+
+    /**
+     * @type {string}
+     */
     #id;
+
+    /**
+     * @type {HTMLLabelElement}
+     */
     #label;
+
+    /**
+     * @type {HTMLInputElement}
+     */
     #input;
+
+    /**
+     * @type {HTMLSpanElement}
+     */
     #error;
     
 
@@ -229,7 +285,10 @@ class FormField{
 
     };
 
-
+    /**
+     * A form elemeit, egy divbe kerülnek sortörésekkel együtt, majd, ezeket a diveket a formba appendolom
+     * @returns {HTMLDivElement}
+     */
     AppendingtoDivElement(){
         const field_div = document.createElement('div');
         const break_1 = document.createElement('br');

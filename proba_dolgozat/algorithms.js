@@ -1,7 +1,15 @@
 class Algorithm extends Area{
+
+    /**
+     * @type {Manager}
+     */
     #manager;
 
-
+    /**
+     * 
+     * @param {string} cssClass 
+     * @param {Manager} manager 
+     */
     constructor(cssClass, manager){
         super(cssClass);
         this.#manager = manager;
@@ -38,6 +46,14 @@ class Algorithm extends Area{
 
     };
 
+
+    /**
+     * 
+     * @param {string} optionvalue 
+     * @param {string} optionText 
+     * @param {HTMLSelectElement} parent 
+     * @returns 
+     */
     makingOptions(optionvalue, optionText, parent){
         const option = document.createElement('option');
         option.value = optionvalue;
