@@ -137,11 +137,11 @@ class Manager{
     generateExportString(){
         const gyujtotomb = [];
         for(const elem of this.#array){
-            const line = `${elem.questionText}; ${elem.answers[0]}; ${elem.answers[1]}; ${elem.answers[2]}; ${elem.answers[3]}; ${elem.rightAnswer}\n`;
+            const line = `${elem.questionText}; ${elem.answers[0]}; ${elem.answers[1]}; ${elem.answers[2]}; ${elem.answers[3]}; ${elem.rightAnswer};`;
 
             gyujtotomb.push(line);
         };
 
-        return gyujtotomb;
+        return gyujtotomb.join('\n');
     };
 };
