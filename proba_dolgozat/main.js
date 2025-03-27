@@ -20,6 +20,7 @@ const area = new TableArea('table', menedzser);
 
 const formarea = new FormArea('form', formfieldekArraye, menedzser);
 const gombok = new Buttons('buttons', menedzser);
+const algoritmus = new Algorithm('algoritmusok');
 
 
 

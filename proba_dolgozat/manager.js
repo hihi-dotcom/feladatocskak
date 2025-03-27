@@ -9,6 +9,10 @@ class Manager{
     #author_array;
     #addCallback;
 
+    get author_array(){
+        return this.#author_array;
+    }
+
     settingAddCallBack(callback){
         this.#addCallback = callback;
     };
