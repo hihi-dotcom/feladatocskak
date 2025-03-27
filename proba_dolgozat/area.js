@@ -79,13 +79,25 @@ class TableArea extends Area{
         
 
         //meghívom a manager settingAddCallbackjét, amely a formból a táblázatba való pusholásért felel
-        manager.settingAddCallBack((author) => {
+        this.#manager.settingAddCallBack((author) => {
 
             const tr = document.createElement('tr');
             tablazatbody.appendChild(tr);
             const td1 = this.makingHTMLElement('td', tr, author.nev);
             const td2 = this.makingHTMLElement('td', tr, author.szamjegyek_szama);
             const td3 = this.makingHTMLElement('td', tr, author.szazad);
+        });
+
+        this.#manager.settingRenderCallback((authors) => {
+            tablazatbody.innerHTML = "";
+            for(const author of authors){
+                const tr = document.createElement('tr');
+                tablazatbody.appendChild(tr);
+                 this.makingHTMLElement('td', tr, author.nev);
+                 this.makingHTMLElement('td', tr, author.szamjegyek_szama);
+                 this.makingHTMLElement('td', tr, author.szazad);
+            };
+
         });
     };
 
