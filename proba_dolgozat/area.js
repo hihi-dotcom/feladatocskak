@@ -80,6 +80,7 @@ class TableArea extends Area{
 
         //meghívom a manager settingAddCallbackjét, amely a formból a táblázatba való pusholásért felel
         manager.settingAddCallBack((author) => {
+
             const tr = document.createElement('tr');
             tablazatbody.appendChild(tr);
             const td1 = this.makingHTMLElement('td', tr, author.nev);

@@ -28,7 +28,7 @@ class Buttons extends Area{
             fileolvasas.onload = () => {//az onload eventlistenert megvalósítom
                 const fileContent = fileolvasas.result;//a FileReader osztályunk eredmény propertyjét eltárolom egy változóban
                 const sorok = fileContent.split('\n');//splittelem az eredményt soronként
-                const vagott_sor =  sorok.slice(2);//majd levágom az első elemét a sliceal
+                const vagott_sor = sorok.slice(1); //majd levágom az első elemét a sliceal
                 for(const sor of vagott_sor){//bejárom a splittelt sorokat
                     const elems = sor.split(';');//minden egyes iterációkor, a ciklusváltozót, tovább splittelem pontos vesszőnként
                     const author = {//létrehozom az author objektumot
