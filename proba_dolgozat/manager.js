@@ -1,11 +1,10 @@
 /**
- * @param {Author} author
  * @callback AddCallback
+ * @param {Author} author
  * @returns {void}
  * 
- * 
+ * @callback RenderCallback
  * @param {Author} author
- * @callback FilterCallback
  * @returns {boolean}
  * 
  * @Rend
@@ -22,6 +21,11 @@ class Manager{
      */
     #addCallback;
 
+    /**
+     * @type {RenderCallback}
+     */
+    #renderCallback;
+
     //a gettere az author arrayünknek
     get author_array(){
         return this.#author_array;
@@ -31,6 +35,10 @@ class Manager{
     settingAddCallBack(callback){
         this.#addCallback = callback;
     };
+
+    settingRenderCallback(callback){
+        this.#renderCallback = callback;
+    }
 
     constructor(){//a constructorban alapértelmezett értéket adok az author_arrayemnek
         this.#author_array = [];
@@ -45,7 +53,10 @@ class Manager{
         this.#addCallback(author);//meghívom az addCallbacket a bemeneti paraméterrel
     };
 
-    
+    /**
+     * 
+     * @returns {string[]}
+     */
     generateToExport(){
 
         const exporttomb = ['Név: ; Számjegyek száma: ; Század: '];//deklarálok egy tömböt, amelynek először üres értéket adok
@@ -59,7 +70,6 @@ class Manager{
  
     };
 
-
     filterBy(callback_bemenetiparam){
         const result = [];
         for(let i = 0; i < this.#author_array.length; i++){
@@ -67,6 +77,12 @@ class Manager{
                 result.push(this.#author_array[i]);
             };
         };
-    }
 
+        this.#renderCallback(result);
+    };
+
+
+    renderDefault(){
+        this.RenderCallback(this.#author_array);
+    }
 };

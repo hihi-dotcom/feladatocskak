@@ -13,9 +13,11 @@ class Algorithm extends Area{
     constructor(cssClass, manager){
         super(cssClass);
         this.#manager = manager;
+        const form = document.createElement('form');
         const input = document.createElement("input");
         input.type = 'text';
-        this.div.appendChild(input);
+        this.div.appendChild(form);
+        form.appendChild(input);
         const input_value = input.value;
         const optionvalues = [
             {
@@ -36,14 +38,40 @@ class Algorithm extends Area{
             },
         ]
         const select = document.createElement('select');
-        this.div.appendChild(select);
+        form.appendChild(select);
         for(const option of optionvalues){
             this.makingOptions(option.value, option.text, select);
         };
 
         const algoritmus_gomb = document.createElement('button');
         algoritmus_gomb.innerHTML = "Szűrés";
+        form.appendChild(algoritmus_gomb);
 
+        form.addEventListener('submit', (e) =>{
+            e.preventDefault();
+            if(select.value === 'nev'){
+
+                manager.filterBy((result) => {
+                    return result.nev.includes(input_value);
+                })
+            }
+            else if(select.value === 'szamjegyek_szama'){
+                manager.filterBy((result) => {
+                    return result.szamjegyek_szama.includes(input_value);
+                })
+            }
+            else if(select.value === 'szazad'){
+                manager.filterBy((result) => {
+                    return result[i].szazad.includes(input_value);
+                });
+            };
+
+            if(select.value === "" && input_value === ""){
+                manager.renderDefault();
+            };
+
+            e.target.reset();
+        });
     };
 
 
