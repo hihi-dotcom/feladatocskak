@@ -13,6 +13,7 @@ class Algorithm extends Area{
     constructor(cssClass, manager){
         super(cssClass);
         this.#manager = manager;
+        console.log(manager);
         const form = document.createElement('form');
         const input = document.createElement("input");
         input.type = 'text';
@@ -49,25 +50,26 @@ class Algorithm extends Area{
 
         form.addEventListener('submit', (e) =>{
             e.preventDefault();
+            console.log(this.#manager);
             if(select.value === 'nev'){
 
-                manager.filterBy((result) => {
+                this.#manager.filterBy((result) => {
                     return result.nev.includes(input_value);
                 })
             }
             else if(select.value === 'szamjegyek_szama'){
-                manager.filterBy((result) => {
+                this.#manager.filterBy((result) => {
                     return result.szamjegyek_szama.includes(input_value);
                 })
             }
             else if(select.value === 'szazad'){
-                manager.filterBy((result) => {
+                this.#manager.filterBy((result) => {
                     return result[i].szazad.includes(input_value);
                 });
             };
 
             if(select.value === "" && input_value === ""){
-                manager.renderDefault();
+                this.#manager.renderDefault();
             };
 
             e.target.reset();
