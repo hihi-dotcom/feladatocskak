@@ -90,6 +90,7 @@ class TableArea extends Area{
 
         this.#manager.settingRenderCallback((authors) => {
             tablazatbody.innerHTML = "";
+            
             for(const author of authors){
                 const tr = document.createElement('tr');
                 tablazatbody.appendChild(tr);

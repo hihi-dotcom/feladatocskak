@@ -19,7 +19,7 @@ class Algorithm extends Area{
         input.type = 'text';
         this.div.appendChild(form);
         form.appendChild(input);
-        const input_value = input.value;
+        
         const optionvalues = [
             {
                 value: 'üres',
@@ -50,10 +50,14 @@ class Algorithm extends Area{
 
         form.addEventListener('submit', (e) =>{
             e.preventDefault();
+            const input_value = input.value;
             console.log(this.#manager);
             if(select.value === 'nev'){
-
+                
                 this.#manager.filterBy((result) => {
+
+                    console.log(result.nev);
+                    console.log(input_value)
                     return result.nev.includes(input_value);
                 })
             }
@@ -64,7 +68,7 @@ class Algorithm extends Area{
             }
             else if(select.value === 'szazad'){
                 this.#manager.filterBy((result) => {
-                    return result[i].szazad.includes(input_value);
+                    return result.szazad.includes(input_value);
                 });
             };
 
