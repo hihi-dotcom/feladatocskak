@@ -20,7 +20,7 @@ if(favourite === 23){//('23' == 23)azért adja vissza a coolt, mert a laza egyen
     console.log('Cool');
 }
 else if(favourite === 7){
-    console.log('Seven, thats my number');
+    console.log('Seven, thats my number');//igaz doloig
 }
 else{
     console.log('Number is not 23 or 7');//hamis dolog 
