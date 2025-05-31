@@ -83,6 +83,6 @@ class Manager{
 
 
     renderDefault(){
-        this.RenderCallback(this.#author_array);
+        this.#renderCallback(this.#author_array);
     }
 };

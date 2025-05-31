@@ -44,7 +44,15 @@ class Data_to_Table{
                 this.HTMLElementMakerWithParentAndTContent('td', termek.megnevezes, tr3);
                 this.HTMLElementMakerWithParentAndTContent('td', termek.aruhaz, tr3);
                 this.HTMLElementMakerWithParentAndTContent('td', termek.honap, tr3);
-                this.HTMLElementMakerWithParentAndTContent('td', termek.osszeg, tr3);
+               const tdosszeg =  this.HTMLElementMakerWithParentAndTContent('td', termek.osszeg, tr3);
+
+                            
+                if(termek.osszeg < 0){
+                    tdosszeg.classList.add(`red`);
+                }
+                else{
+                    tdosszeg.classList.add(`green`);
+                };
             }
         });
 
@@ -108,6 +116,10 @@ class Data_to_Table{
 
         this.#renderCallback(result_ok);
     };
+
+    DefaultRendering(){
+        this.#renderCallback(this.#array);
+    }
 
 
 
@@ -278,6 +290,10 @@ const fajl_input2 = document.createElement('input');
             AdatTabla.filterBy((result_termek) => {
                     let resulttarolo = false;
                     if(result_termek.megnevezes.includes(megnevezes_input_value) && result_termek.osszeg === osszeg_input_value && select.value === result_termek.honap){
+                        resulttarolo = true;
+                    }
+                    if(megnevezes_input_value == "" && osszeg_input_value == "" && select.value == ''){
+                        AdatTabla.DefaultRendering();
                         resulttarolo = true;
                     }
                     return resulttarolo;
