@@ -277,11 +277,10 @@ const fajl_input2 = document.createElement('input');
 
             AdatTabla.filterBy((result_termek) => {
                     let resulttarolo = false;
-                      if(result_termek.megnevezes.includes(megnevezes_input_value) && result_termek.osszeg === osszeg_input_value && select.value === result_termek.honap){
+                    if(result_termek.megnevezes.includes(megnevezes_input_value) && result_termek.osszeg === osszeg_input_value && select.value === result_termek.honap){
                         resulttarolo = true;
                     }
                     return resulttarolo;
-                    
             });
         });
     /**
