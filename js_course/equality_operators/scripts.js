@@ -29,3 +29,18 @@ else{
 if(favourite !== 23){//egyenlőség mellett van a különböző operátor is, amikből ugyanúgy van szigoró és laza 
     console.log('Not 23');
 }
+
+const gyumolcs = ['alma', 'korte', 'narancs'];
+
+const szuresText = mivel => {
+  for (const elem of gyumolcs) {
+    if (!mivel || elem.includes(mivel)) {
+      console.log(elem);
+    }
+  }
+};
+
+
+szuresText('')
+console.log('----r-re szures------')
+szuresText('r')

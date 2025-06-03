@@ -289,13 +289,24 @@ const fajl_input2 = document.createElement('input');
 
             AdatTabla.filterBy((result_termek) => {
                     let resulttarolo = false;
-                    if(result_termek.megnevezes.includes(megnevezes_input_value) && result_termek.osszeg === osszeg_input_value && select.value === result_termek.honap){
+
+                    
+      
+
+                    if(megnevezes_input_value == ""|| result_termek.megnevezes.includes(megnevezes_input_value)){
                         resulttarolo = true;
                     }
-                    if(megnevezes_input_value == "" && osszeg_input_value == "" && select.value == ''){
-                        AdatTabla.DefaultRendering();
-                        resulttarolo = true;
+                    if(resulttarolo){
+                        if(!select.value || select.value == result_termek.honap){
+                            resulttarolo = true;
+                        }
                     }
+                    if(resulttarolo){
+                                if(!osszeg_input_value == ""|| osszeg_input_value == result_termek.osszeg){
+                                    resulttarolo = true;
+                                }
+                    }
+
                     return resulttarolo;
             });
         });
