@@ -285,7 +285,7 @@ const fajl_input2 = document.createElement('input');
             e.preventDefault();
             const megnevezes_input_value = megnevezesinput.value;
 
-            const osszeg_input_value = Number(osszeginput.value);
+            const osszeg_input_value = osszeginput.value;
 
             AdatTabla.filterBy((result_termek) => {
                     let resulttarolo = false;
@@ -296,14 +296,23 @@ const fajl_input2 = document.createElement('input');
                     if(megnevezes_input_value == ""|| result_termek.megnevezes.includes(megnevezes_input_value)){
                         resulttarolo = true;
                     }
+                    else{
+                                    resulttarolo = false;
+                    }
                     if(resulttarolo){
                         if(!select.value || select.value == result_termek.honap){
                             resulttarolo = true;
                         }
+                        else{
+                            resulttarolo = false;
+                        }
                     }
                     if(resulttarolo){
-                                if(!osszeg_input_value == ""|| osszeg_input_value == result_termek.osszeg){
+                                if(!osszeg_input_value|| String(result_termek.osszeg).includes(osszeg_input_value)){
                                     resulttarolo = true;
+                                }
+                                else{
+                                    resulttarolo = false;
                                 }
                     }
 
