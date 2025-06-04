@@ -117,7 +117,7 @@ class Area{
     
 };
 
-class FormArea{
+class FormArea {
 
     #fajltart;
     #optionvaluek;
@@ -158,13 +158,19 @@ class FormArea{
 
     /**
      * 
-     * @param {HTMLOptionElement[]} optionok 
+     * @param {HTMLOptionElement[]} optionok
+     * 
      */
-    constructor(optionok, optionoktomb2){
+    constructor(optionok, optionoktomb2, ){
+        
         this.#fajltart = [];
         this.#sorbarendszpont = optionoktomb2;
         this.#optionvaluek = optionok;
         this.#sorbarendezesoptionok_tomb = [
+            {
+                value: '',
+                textcontent: ''
+            },
             {
                 value: 'csokkeno',
                 textcontent: 'Csökkenő'

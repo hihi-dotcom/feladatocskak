@@ -49,7 +49,7 @@ class Algo{
             const sorba_irany_v = this.#formarea.sorba_irany.value;
             const sorba_szempont_v = this.#formarea.sorba_szempont.value;
 
-            if(megnevezes_input_v || select_v || koltseg_input_v && !sorba_irany_v || sorba_szempont_v){
+            if(megnevezes_input_v || select_v || koltseg_input_v && (sorba_irany_v== '' && sorba_szempont_v == '')){
                 this.filterBy((result_kolt) => {
                     let eredmenytarolo = false;
 
@@ -81,7 +81,7 @@ class Algo{
                 });
                 
             }
-            if(!megnevezes_input_v || select_v || koltseg_input_v && sorba_irany_v || sorba_szempont_v){
+            if((megnevezes_input_v=="" && select_v == '' && koltseg_input_v == 0) && (sorba_irany_v && sorba_szempont_v)){
                 this.orderBy((rendez_koltes1, rendezkoltes2) => {
                     let rendezes_eredmeny_tar = false;
                     let ertek_1 = rendez_koltes1[sorba_szempont_v];
@@ -108,6 +108,22 @@ class Algo{
                     return rendezes_eredmeny_tar;
                 });
             }
+            if(!megnevezes_input_v && !select_v && !koltseg_input_v && !sorba_irany_v && !sorba_szempont_v){
+                if(!document.querySelector("#error")){
+                    const div = document.createElement('div');
+                    document.body.appendChild(div);
+                    div.id = "error";
+                    div.textContent = "Ki kell tölteni valamelyik mezőt!!!";
+                    div.style.color = "red";
+                }
+            }
+            else{
+                const errorDiv = document.querySelector("#error");
+                if(errorDiv){
+                    errorDiv.remove();
+                }
+            }
+        
         }
     }
 

@@ -54,6 +54,10 @@ const optionvaluek = [
 ];         
 const szempontok = [
         {
+            value: '',
+            innerHTML: ''
+        },
+        {
             value: "megnevezes",
             innerHTML: "Megnevezés"
         },
