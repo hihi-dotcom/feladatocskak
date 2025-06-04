@@ -9,8 +9,8 @@ class Algo{
     }
     constructor(form_be_area){
         this.#formarea = form_be_area;
-
-        this.#formarea.form.addEventListener('submit', this.#FilterAndOrderEventMethod());
+        const eventback = this.#FilterAndOrderEventMethod();
+        this.#formarea.form.addEventListener('submit',eventback);
     }
     filterBy(callback_bem_param){
         const szures_eredmeny = [];
@@ -48,7 +48,8 @@ class Algo{
 
             const sorba_irany_v = this.#formarea.sorba_irany.value;
             const sorba_szempont_v = this.#formarea.sorba_szempont.value;
-            if(megnevezes_input_v || select_v || koltseg_input_v){
+
+            if(megnevezes_input_v || select_v || koltseg_input_v && !sorba_irany_v || sorba_szempont_v){
                 this.filterBy((result_kolt) => {
                     let eredmenytarolo = false;
 
@@ -80,7 +81,7 @@ class Algo{
                 });
                 
             }
-            if(sorba_irany_v || sorba_szempont_v){
+            if(!megnevezes_input_v || select_v || koltseg_input_v && sorba_irany_v || sorba_szempont_v){
                 this.orderBy((rendez_koltes1, rendezkoltes2) => {
                     let rendezes_eredmeny_tar = false;
                     let ertek_1 = rendez_koltes1[sorba_szempont_v];
